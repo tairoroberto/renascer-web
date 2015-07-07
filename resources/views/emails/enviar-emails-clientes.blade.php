@@ -24,13 +24,40 @@
     });
 
     function enviar(){
+        $('#Carregando').css('display','block');
         formEnviarEmails.submit();
+
+        $('.div-ajax-carregamento-pagina').fadeOut('fast');
     }
 
     function chageMsg(msg){
         $('#mensagem').val(msg);
     }
 </script>
+    <style>
+        .jquery-waiting-base-container {
+            position: absolute;
+            left: 0px;
+            top: 40%;
+            margin:0px;
+            width: 100%;
+            height: 200px;
+            display:block;
+            z-index: 9999997;
+            opacity: 0.65;
+            -moz-opacity: 0.65;
+            filter: alpha(opacity = 65);
+            background: black;
+            background-image: url("{{asset('/images/loading_bar.gif')}}");
+            background-repeat: no-repeat;
+            background-position:50% 50%;
+            text-align: center;
+            overflow: hidden;
+            font-weight: bold;
+            color: white;
+            padding-top: 25%;
+        }
+    </style>
 @stop
 
 @section('content')
@@ -86,7 +113,8 @@
 
                     <div class="panel-body">
                         <div class="col-md-12" align="center">
-                            <?php $mensagemEmails = \Renascer\MensagemEmail::all()->take(2);?>
+                          <?php $mensagemEmails = \Renascer\MensagemEmail::take(2)->where('id','!=',0)->orderBy('id','asc')->get();?>
+
                             <table class="table table-condensed table-hover">
                             	<tbody>
                                     <tr>
@@ -126,6 +154,10 @@
                 </div>
             </div>
         </div>
+
+        {{-- Div de mensagem de carregamento--}}
+        <div id="Carregando" style="display: none;" class="jquery-waiting-base-container">Carregando...</div>
+
     </form>
 </div>
 @endsection

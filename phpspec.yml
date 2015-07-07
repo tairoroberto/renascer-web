@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Renascer
+        psr4_prefix: Renascer
+        src_path: app

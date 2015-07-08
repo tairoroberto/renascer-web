@@ -24,6 +24,7 @@
     });
 
     function enviar(){
+        $('#btnEnviar').css('display','none');
         $('#Carregando').css('display','block');
         formEnviarEmails.submit();
 
@@ -145,7 +146,7 @@
                         <div class="form-group">
                             <div class="col-md-12 col-sm-12" style="text-align: right;">
                                 <br>
-                                <button type="button" class="btn btn-lg btn-primary" onclick="enviar();">Enviar</button>
+                                <button id="btnEnviar" type="button" class="btn btn-lg btn-primary" onclick="enviar();">Enviar</button>
                             </div>
                         </div>
 

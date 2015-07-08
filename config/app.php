@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'UTC-3',
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'pt-BR',
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'pt-BR',
 
     /*
     |--------------------------------------------------------------------------
@@ -146,8 +146,8 @@ return [
 
         Barryvdh\Debugbar\ServiceProvider::class,
         Collective\Remote\RemoteServiceProvider::class,
-
-        yajra\Datatables\DatatablesServiceProvider::class
+        yajra\Datatables\DatatablesServiceProvider::class,
+        Collective\Remote\RemoteServiceProvider::class,
 
     ],
 
@@ -200,7 +200,7 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'SSH' => Collective\Remote\RemoteFacade::class,
         'Datatables' => yajra\Datatables\Datatables::class,
-
+        'SSH' => Collective\Remote\RemoteFacade::class,
     ],
 
 ];

@@ -23,9 +23,9 @@
 		*/
 		'connections' => [
 			'production' => [
-				'host'      => '',
-				'username'  => '',
-				'password'  => '',
+				'host'      => 'trmasolucoes.com.br',
+				'username'  => 'trmasolucoes',
+				'password'  => 'tairo1507',
 				'key'       => '',
 				'keytext'   => '',
 				'keyphrase' => '',

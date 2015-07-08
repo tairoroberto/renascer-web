@@ -89,13 +89,10 @@ Route::any("/relatorio-usuarios", "RelatorioController@relatorioUsuarios");
 Route::post("email-cadastro", "EmailController@store");
 
 Route::get("teste", function(){
-    for($i = 0; $i < 2000; $i++){
-        $email = new \Renascer\Email();
-        $email->email = "teste@trmasolucoes.com.br";
-        $email->cliente = "teste ". $i;
-        $email->situation = "";
-        $email->loja = 13;
-        $email->user = 1;
-        $email->save();
-    }
+
+    SSH::run(['cd www', 'cd renascer2'], function($line)
+    {
+        echo $line.PHP_EOL;
+    });
+
 });

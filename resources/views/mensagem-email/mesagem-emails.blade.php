@@ -28,8 +28,13 @@
     });
 
     function enviar(){
+        $('#btnEnviar').css('display','none');
+        $('#imagePreview').css('display','none');
+        $('#Carregando').css('display','block');
+
         $('#mensagem').text($('#textEditor').Editor('getText'));
         formEnviarEmails.submit();
+        $('.div-ajax-carregamento-pagina').fadeOut('fast');
     }
 
     jQuery(function(){
@@ -49,6 +54,30 @@
         }
     }
 </script>
+<style>
+    .jquery-waiting-base-container {
+        position: absolute;
+        left: 0px;
+        top: 40%;
+        margin:0px;
+        width: 100%;
+        height: 200px;
+        display:block;
+        z-index: 9999997;
+        opacity: 0.65;
+        -moz-opacity: 0.65;
+        filter: alpha(opacity = 65);
+        background: black;
+        background-image: url("{{asset('/images/loading_bar.gif')}}");
+        background-repeat: no-repeat;
+        background-position:50% 50%;
+        text-align: center;
+        overflow: hidden;
+        font-weight: bold;
+        color: white;
+        padding-top: 25%;
+    }
+</style>
 @stop
 
 @section('content')
@@ -107,7 +136,7 @@
                                        title='Selecione uma imagem' onchange="readURL(this);">
                             </div>
                             <div class="col-md-10 col-sm-10 col-xs-12" style="text-align: right;">
-                                <button type="button" class="btn btn-primary" onclick="enviar();">Salvar mensagem</button>
+                                <button id="btnEnviar" type="button" class="btn btn-primary" onclick="enviar();">Salvar mensagem</button>
                             </div>
                         </div>
 
@@ -116,6 +145,9 @@
                 </div>
             </div>
         </div>
+
+        {{-- Div de mensagem de carregamento--}}
+        <div id="Carregando" style="display: none;" class="jquery-waiting-base-container">Carregando...</div>
     </form>
 </div>
 @endsection

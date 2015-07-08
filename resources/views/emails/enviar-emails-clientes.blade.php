@@ -114,7 +114,7 @@
 
                     <div class="panel-body">
                         <div class="col-md-12" align="center">
-                          <?php $mensagemEmails = \Renascer\MensagemEmail::take(2)->where('id','!=',0)->orderBy('id','asc')->get();?>
+                          <?php $mensagemEmails = \Renascer\MensagemEmail::take(2)->where('id','!=',0)->orderBy('id','desc')->get();?>
 
                             <table class="table table-condensed table-hover">
                             	<tbody>

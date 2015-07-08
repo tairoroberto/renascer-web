@@ -90,9 +90,10 @@ Route::post("email-cadastro", "EmailController@store");
 
 Route::get("teste", function(){
 
-    SSH::run(['cd www', 'cd renascer2'], function($line)
+    SSH::run(['cd www', 'cd renascer', '/usr/local/php/5.5/bin/php artisan queue:work'], function($line)
     {
         echo $line.PHP_EOL;
     });
 
+    return Redirect::to("email-cadastro");
 });

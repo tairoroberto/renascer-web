@@ -34,6 +34,14 @@
     function chageMsg(msg){
         $('#mensagem').val(msg);
     }
+
+    function dispararEmails() {
+        var a = document.createElement("a");
+        a.target = "_blank";
+        a.href = "{{action('EmailController@dispararEmails')}}";
+        a.click();
+    }
+
 </script>
     <style>
         .jquery-waiting-base-container {
@@ -78,6 +86,12 @@
                                     @endforeach
                                 </ul>
                             </div>
+
+                            {{--Redirect to send emails--}}
+                            <script>
+                                dispararEmails();
+                            </script>
+
                         @else
                             <div class="alert alert-danger">
                                 <strong>Whoops!</strong> Alguma coisa deu errado!<br><br>
@@ -117,6 +131,10 @@
                           <?php $mensagemEmails = \Renascer\MensagemEmail::take(2)->where('id','!=',0)->orderBy('id','desc')->get();?>
 
                             <table class="table table-condensed table-hover">
+                                <thead>
+                                    <th style="width: 50%"></th>
+                                    <th style="width: 50%"></th>
+                                </thead>
                             	<tbody>
                                     <tr>
                                         @foreach($mensagemEmails as $mensagemEmail)

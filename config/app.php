@@ -197,10 +197,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'SSH' => Collective\Remote\RemoteFacade::class,
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
+        'SSH'       => Collective\Remote\RemoteFacade::class,
         'Datatables' => yajra\Datatables\Datatables::class,
-        'SSH' => Collective\Remote\RemoteFacade::class,
     ],
 
 ];

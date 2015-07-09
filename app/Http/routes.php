@@ -57,6 +57,10 @@ Route::get('/desativar-email/{id}',array(
     'uses'  =>  'EmailController@destroy'
 ));
 
+Route::get('disparar-emails',array(
+    'as'    =>  'disparar-emails',
+    'uses'  =>  'EmailController@dispararEmails'
+));
 
 Route::post("/mesagem-emails", "MensagemEmailController@index");
 
@@ -88,12 +92,3 @@ Route::any("/relatorio-usuarios", "RelatorioController@relatorioUsuarios");
 
 Route::post("email-cadastro", "EmailController@store");
 
-Route::get("teste", function(){
-
-    SSH::run(['cd www', 'cd renascer', '/usr/local/php/5.5/bin/php artisan queue:work'], function($line)
-    {
-        echo $line.PHP_EOL;
-    });
-
-    return Redirect::to("email-cadastro");
-});

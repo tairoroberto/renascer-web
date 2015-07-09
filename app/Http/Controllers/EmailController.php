@@ -1,5 +1,6 @@
 <?php namespace Renascer\Http\Controllers;
 
+use DebugBar\DebugBar;
 use Renascer\Email;
 use Renascer\Http\Requests;
 use Renascer\Http\Controllers\Controller;
@@ -106,11 +107,20 @@ class EmailController extends Controller {
 
 
         if($emails->count() > 0){
+            $count = 0;
             foreach($emails as $email){
-                //call commnad
-                $this->dispatch(
-                    new EnviarEmailsJob($email, $mensagem)
-                );
+                if(($count % 200) != 0){
+                    //call commnad
+                    $this->dispatch(
+                        new EnviarEmailsJob($email, $mensagem, 0)
+                    );
+                }else{
+                    //call commnad
+                    $this->dispatch(
+                        new EnviarEmailsJob($email, $mensagem, 60*60)
+                    );
+                }
+                $count++;
             }
 
             return \Redirect::route("enviar-emails-clientes-layout")
@@ -125,12 +135,11 @@ class EmailController extends Controller {
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function dispararEmails()
     {
-        //
+        return view('emails.disparo-emails');
     }
 
 	/**

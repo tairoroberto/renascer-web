@@ -5,7 +5,7 @@
         .jquery-waiting-base-container {
             position: absolute;
             left: 0px;
-            top: 40%;
+            top: 20%;
             margin:0px;
             width: 100%;
             height: 200px;
@@ -31,6 +31,9 @@
 <div class="container">
     <form id="formEnviarEmails" method="post" enctype="multipart/form-data" action="{{action('MensagemEmailController@store')}}">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div style="text-align: center">
+            <h1> <a href="{{route("painel")}}">Disparando Emails...</a></h1>
+        </div>
         {{-- Div de mensagem de carregamento--}}
         <div id="Carregando" class="jquery-waiting-base-container">Enviando emails...</div>
 
@@ -43,7 +46,6 @@
 
             SSH::run($commands, function($line) {
                 echo $line.PHP_EOL;
-                return Redirect::to("email-cadastro");
             });
         ?>
 

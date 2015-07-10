@@ -36,8 +36,13 @@ class EnviarEmailsJob extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+        if($this->attempts() > 3) {
+            $this->delete();
+        }
         \Mail::send('emails.email-cliente', array('email' => $this->email, 'mensagem' => $this->mensagem), function($message){
             $message->to($this->email->email, $this->email->cliente)->subject('Promoções Renascer Carnes');
         });
     }
+
+
 }

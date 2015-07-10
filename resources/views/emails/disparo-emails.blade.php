@@ -25,6 +25,28 @@
             padding-top: 25%;
         }
     </style>
+    <script>
+        /*$( document ).ready(function() {
+            // Using YQL and JSONP
+            $.ajax({
+                url: "{{action('EmailController@runCommands')}}",
+                // Work with the response
+                success: function( response ) {
+                    console.log( response ); // server response
+                }
+            });
+        });*/
+
+        $(function () {
+            $.ajax({
+                url: "{{action('EmailController@runCommands','queue:work --tries=3')}}",
+                // Work with the response
+                success: function( response ) {
+                    console.log( response ); // server response
+                }
+            });
+        });
+    </script>
 @stop
 
 @section('content')
@@ -36,19 +58,6 @@
         </div>
         {{-- Div de mensagem de carregamento--}}
         <div id="Carregando" class="jquery-waiting-base-container">Enviando emails...</div>
-
-        <?php
-            $commands = [
-                'cd www',
-                'cd renascer',
-                '/usr/local/php/5.5/bin/php artisan queue:work'
-            ];
-
-            SSH::run($commands, function($line) {
-                echo $line.PHP_EOL;
-            });
-        ?>
-
     </form>
 </div>
 @stop

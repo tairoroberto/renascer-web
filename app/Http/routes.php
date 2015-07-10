@@ -62,6 +62,11 @@ Route::get('disparar-emails',array(
     'uses'  =>  'EmailController@dispararEmails'
 ));
 
+Route::get('run-commands/{option}',array(
+    'as'    =>  'run-commands',
+    'uses'  =>  'EmailController@runCommands'
+));
+
 Route::post("/mesagem-emails", "MensagemEmailController@index");
 
 Route::post("/deletar-usuario", "PainelController@destroy");

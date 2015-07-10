@@ -134,6 +134,23 @@ class EmailController extends Controller {
         return view('emails.disparo-emails');
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     * @param $options
+     */
+    public function runCommands($options){
+
+        $commands = [
+            'cd www',
+            'cd renascer',
+            '/usr/local/php/5.5/bin/php artisan '.$options
+        ];
+
+        \SSH::run($commands, function($line){
+            echo $line.PHP_EOL."<pre>";
+        });
+    }
+
 	/**
 	 * Show the form for editing the specified resource.
 	 *

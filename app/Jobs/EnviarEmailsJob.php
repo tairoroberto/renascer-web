@@ -16,7 +16,6 @@ class EnviarEmailsJob extends Job implements SelfHandling, ShouldQueue
 
     private $email;
     private $mensagem;
-    private $time;
 
     /**
      * Create a new job instance.
@@ -24,11 +23,10 @@ class EnviarEmailsJob extends Job implements SelfHandling, ShouldQueue
      * @param Email $email
      * @param MensagemEmail $mensagem
      */
-    public function __construct(Email $email, MensagemEmail $mensagem, $time)
+    public function __construct(Email $email, MensagemEmail $mensagem)
     {
         $this->email = $email;
         $this->mensagem = $mensagem;
-        $this->time = $time;
     }
 
     /**
@@ -38,11 +36,8 @@ class EnviarEmailsJob extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        $email = $this->email;
-        $mensagem = $this->mensagem;
-        //send email to nutricionist and client
-        \Mail::later($this->time,'emails.email-cliente', array('email' => $email, 'mensagem' => $mensagem), function($message) use($email){
-            $message->to($email->email, $email->cliente)->subject('Promoções Renascer Carnes');
+        \Mail::send('emails.email-cliente', array('email' => $this->email, 'mensagem' => $this->mensagem), function($message){
+            $message->to($this->email->email, $this->email->cliente)->subject('Promoções Renascer Carnes');
         });
     }
 }

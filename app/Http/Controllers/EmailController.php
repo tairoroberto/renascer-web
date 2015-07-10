@@ -107,22 +107,12 @@ class EmailController extends Controller {
 
 
         if($emails->count() > 0){
-            $count = 0;
+
             foreach($emails as $email){
-                if(($count % 200) != 0){
-                    //call commnad
-                    /*$this->dispatch(
-                        new EnviarEmailsJob($email, $mensagem, 0)
-                    );*/
-                    \Debugbar::info($count);
-                }else{
-                    //call commnad
-                    /*$this->dispatch(
-                        new EnviarEmailsJob($email, $mensagem, 60*60)
-                    );*/
-                    //\Debugbar::info($count);
-                }
-                $count++;
+                //call commnad
+                $this->dispatch(
+                    new EnviarEmailsJob($email, $mensagem)
+                );
             }
 
             return \Redirect::route("enviar-emails-clientes-layout")

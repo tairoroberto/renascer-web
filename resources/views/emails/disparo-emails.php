@@ -35,7 +35,7 @@
         <div id="Carregando" class="jquery-waiting-base-container">Enviando emails...</div>
 
         <?php
-            /*$commands = [
+            $commands = [
                 'cd www',
                 'cd renascer',
                 '/usr/local/php/5.5/bin/php artisan queue:work'
@@ -44,8 +44,7 @@
             SSH::run($commands, function($line) {
                 echo $line.PHP_EOL;
                 return Redirect::to("email-cadastro");
-            });*/
-            Artisan::call("queue:listen");
+            });
         ?>
 
     </form>

@@ -92,12 +92,4 @@ Route::any("/relatorio-usuarios", "RelatorioController@relatorioUsuarios");
 
 Route::post("email-cadastro", "EmailController@store");
 
-Route::get("debug/{value}",function($value){
-    if($value == 1){
-        debugbar()->enable();
-    }else{
-        debugbar()->disable();
-    }
-    return Redirect::to("/");
-});
 

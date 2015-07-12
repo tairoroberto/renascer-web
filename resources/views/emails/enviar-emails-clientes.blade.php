@@ -20,7 +20,6 @@
                   }
             }
         });
-
     });
 
     function enviar(){
@@ -36,10 +35,7 @@
     }
 
     function dispararEmails() {
-        var a = document.createElement("a");
-        a.target = "_blank";
-        a.href = "{{action('EmailController@dispararEmails')}}";
-        a.click();
+        formDispararEmails.submit();
     }
 
 </script>
@@ -104,7 +100,21 @@
                         @endif
                     @endif
 
-                    <div class="panel-heading">Enviar emails para clientes</div>
+                    <?php
+                        $contador = \Renascer\EmailsEnviados::where('updated_at','>=','01-'.date('m-Y').' 00:00:00')
+                                                  ->where('updated_at','<=','31-'.date('m-Y').' 00:00:00')
+                                                  ->get()
+                                                  ->first();
+                     ?>
+
+
+                    <div class="panel-heading" style="text-align: center">
+                        @if($contador->count < 9500)
+                            <b style="color: #0077b3">Você enviou <b style="color: #080808">{{number_format($contador->count, 0, '.', '.')}}</b> dos <b style="color: #080808">9.500</b> disponíves para o mês</b>
+                        @else
+                            <b style="color: #C40D0D">Você já ultilizou toda a cota de emails <b style="color: #080808">{{number_format($contador->count, 0, '.', '.')}}</b> dos <b style="color: #080808">9.500</b> disponíves para o mês</b>
+                        @endif
+                    </div>
                     <br>
                     <?php $lojas = \Renascer\Loja::all();?>
 
@@ -177,6 +187,9 @@
         {{-- Div de mensagem de carregamento--}}
         <div id="Carregando" style="display: none;" class="jquery-waiting-base-container">Carregando...</div>
 
+    </form>
+    <form id="formDispararEmails" action="{{action('EmailController@dispararEmails')}}" target="_blank" method="get">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
     </form>
 </div>
 @endsection

@@ -3,6 +3,7 @@
 namespace Renascer\Jobs;
 
 use Renascer\Email;
+use Renascer\EmailsEnviados;
 use Renascer\Jobs\Job;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -36,13 +37,13 @@ class EnviarEmailsJob extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        if($this->attempts() > 3) {
-            $this->delete();
-        }
-        \Mail::send('emails.email-cliente', array('email' => $this->email, 'mensagem' => $this->mensagem), function($message){
+        if(\Mail::send('emails.email-cliente', array('email' => $this->email, 'mensagem' => $this->mensagem), function($message){
             $message->to($this->email->email, $this->email->cliente)->subject('Promoções Renascer Carnes');
-        });
+        })){
+            $contador = EmailsEnviados::where('updated_at','>=','01-'.date('m-Y').' 00:00:00')
+                                      ->where('updated_at','<=','31-'.date('m-Y').' 00:00:00')->get()->first();
+            $contador->count++;
+            $contador->save();
+        }
     }
-
-
 }

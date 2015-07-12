@@ -26,20 +26,9 @@
         }
     </style>
     <script>
-        /*$( document ).ready(function() {
-            // Using YQL and JSONP
+        $( document ).ready(function() {
             $.ajax({
-                url: "{{action('EmailController@runCommands')}}",
-                // Work with the response
-                success: function( response ) {
-                    console.log( response ); // server response
-                }
-            });
-        });*/
-
-        $(function () {
-            $.ajax({
-                url: "{{action('EmailController@runCommands','queue:work --tries=3')}}",
+                url: "{{action('EmailController@runCommands','queue:work')}}",
                 // Work with the response
                 success: function( response ) {
                     console.log( response ); // server response

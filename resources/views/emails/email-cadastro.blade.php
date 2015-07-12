@@ -44,10 +44,10 @@
                             </div>
                         @else
                             <div class="alert alert-danger">
-                                <strong>Whoops!</strong> Alguma coisa deu errado!<br><br>
+                                {{--<strong>Whoops!</strong> Alguma coisa deu errado!<br><br>--}}
                                 <ul>
                                     @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
+                                        <strong> <li>{{ $error }}</li></strong>
                                     @endforeach
                                 </ul>
                             </div>
@@ -96,9 +96,15 @@
                                     Salvar
                                 </button>
                             </div>
+                            <div align="center" class="">
+                                <img src="{{asset('img/logo.jpg')}}" width="80%" height="250px">
+                            </div>
                         </div>
                     </form>
+
 				</div>
+                
+
 			</div>
 		</div>
 	</div>

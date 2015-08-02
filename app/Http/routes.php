@@ -93,7 +93,7 @@ Route::post("/relatorio-emails", "RelatorioController@relatorioEmails");
 
 Route::get("/relatorio-emails-data", "RelatorioController@relatorioEmailsData");
 
-Route::post("/relatorio-usuarios", "RelatorioController@relatorioUsuarios");
+Route::any("/relatorio-usuarios", "RelatorioController@relatorioUsuarios");
 
 Route::post("email-cadastro", "EmailController@store");
 

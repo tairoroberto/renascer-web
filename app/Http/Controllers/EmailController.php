@@ -2,6 +2,7 @@
 
 use DebugBar\DebugBar;
 use Renascer\Email;
+use Renascer\EmailsEnviados;
 use Renascer\Http\Requests;
 use Renascer\Http\Controllers\Controller;
 
@@ -97,6 +98,13 @@ class EmailController extends Controller {
 
             return \Redirect::to('enviar-emails-clientes-layout')
                 ->withErrors(['Selecione a loja para enviar o email.'])
+                ->withInput();
+        }
+
+        $emailsEnviados = EmailsEnviados::find(1);
+        if($emailsEnviados->count >= 9500 || $emailsEnviados->canSend == 0){
+            return \Redirect::to('enviar-emails-clientes-layout')
+                ->withErrors(['O limite de email para o mês foi atingido.'])
                 ->withInput();
         }
 

@@ -32,6 +32,17 @@ class RelatorioController extends Controller {
 		//
 	}
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function cadastroUsuarios()
+    {
+        \Auth::logout();
+        return view('auth.register');
+    }
+
 	/**
 	 * Show the form for creating a new resource.
 	 *

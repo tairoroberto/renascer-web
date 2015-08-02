@@ -24,43 +24,42 @@
 
     function enviar(action){
         if(action == "relatorioLoja"){
-            formPainel.action = "{{action('RelatorioController@relatorioLoja')}}"
+            formPainel.action = "{{action('RelatorioController@relatorioLoja')}}";
             formPainel.submit();
         }
 
         if(action == "relatorioCaixa"){
-            formPainel.action = "{{action('RelatorioController@relatorioCaixa')}}"
+            formPainel.action = "{{action('RelatorioController@relatorioCaixa')}}";
             formPainel.submit();
         }
 
         if(action == "relatorioEmails"){
-            formPainel.action = "{{action('RelatorioController@relatorioEmails')}}"
+            formPainel.action = "{{action('RelatorioController@relatorioEmails')}}";
             formPainel.submit();
         }
 
         if(action == "relatorioUsuarios"){
-            formPainel.action = "{{action('RelatorioController@relatorioUsuarios')}}"
+            formPainel.action = "{{action('RelatorioController@relatorioUsuarios')}}";
             formPainel.submit();
         }
 
         if(action == "cadastrarUsuarios"){
-            formPainel.action = "{{url('/auth/register')}}"
-            formPainel.method = "get";
+            formPainel.action = "{{action('RelatorioController@cadastroUsuarios')}}";
             formPainel.submit();
         }
 
         if(action == "enviarEmailClientes"){
-            formPainel.action = "{{action('EmailController@enviarEmailClientesLayout')}}"
+            formPainel.action = "{{action('EmailController@enviarEmailClientesLayout')}}";
             formPainel.submit();
         }
 
         if(action == "cadastrarMsgEmail"){
-            formPainel.action = "{{action('MensagemEmailController@index')}}"
+            formPainel.action = "{{action('MensagemEmailController@index')}}";
             formPainel.submit();
         }
 
         if(action == "cadastrarLoja"){
-            formPainel.action = "{{action('LojaController@index')}}"
+            formPainel.action = "{{action('LojaController@index')}}";
             formPainel.submit();
         }
 

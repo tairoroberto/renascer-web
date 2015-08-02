@@ -15,7 +15,7 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
-Route::get("/register","HomeController@registro");
+Route::any("/register","RelatorioController@cadastroUsuarios");
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -93,8 +93,10 @@ Route::post("/relatorio-emails", "RelatorioController@relatorioEmails");
 
 Route::get("/relatorio-emails-data", "RelatorioController@relatorioEmailsData");
 
-Route::any("/relatorio-usuarios", "RelatorioController@relatorioUsuarios");
+Route::post("/relatorio-usuarios", "RelatorioController@relatorioUsuarios");
 
 Route::post("email-cadastro", "EmailController@store");
 
-
+Route::get("/teste", function(){
+        echo date('d');
+});

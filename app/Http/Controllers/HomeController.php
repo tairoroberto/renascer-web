@@ -1,6 +1,7 @@
 <?php namespace Renascer\Http\Controllers;
 
 use Renascer\Email;
+use Renascer\EmailsEnviados;
 
 class HomeController extends Controller {
 
@@ -23,6 +24,16 @@ class HomeController extends Controller {
 	public function __construct()
 	{
 		$this->middleware('auth');
+
+        //verificação de emails enviados
+        $emailEnviados = EmailsEnviados::find(1);
+        if(date('d') == '01'){
+            if(($emailEnviados->count >= 9500) || ($emailEnviados->canSend == 0)){
+                $emailEnviados->count = 0;
+                $emailEnviados->canSend = 1;
+                $emailEnviados->save();
+            }
+        }
 	}
 
 	/**
@@ -33,7 +44,8 @@ class HomeController extends Controller {
 	public function index()
 	{
         if(\Auth::check()){
-            if(\Auth::user()->type == "Administrador"){
+
+			if(\Auth::user()->type == "Administrador"){
                 return \Redirect::to('painel');
             }
             return view('emails.email-cadastro');

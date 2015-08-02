@@ -15,6 +15,7 @@ class CreateTableEmailsEnviados extends Migration
         Schema::create('emails_enviados', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('count');
+            $table->integer('canSend');
             $table->timestamps();
         });
     }

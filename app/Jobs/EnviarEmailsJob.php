@@ -37,13 +37,19 @@ class EnviarEmailsJob extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        if(\Mail::send('emails.email-cliente', array('email' => $this->email, 'mensagem' => $this->mensagem), function($message){
-            $message->to($this->email->email, $this->email->cliente)->subject('Promoções Renascer Carnes');
-        })){
-            $contador = EmailsEnviados::where('updated_at','>=','01-'.date('m-Y').' 00:00:00')
-                                      ->where('updated_at','<=','31-'.date('m-Y').' 00:00:00')->get()->first();
-            $contador->count++;
+        $contador = EmailsEnviados::find(1);
+        if($contador->count <= 9500 && $contador->canSend == 1){
+            if(\Mail::send('emails.email-cliente', array('email' => $this->email, 'mensagem' => $this->mensagem), function($message){
+                $message->to($this->email->email, $this->email->cliente)->subject('Promoções Renascer Carnes');
+            })){
+
+                $contador->count++;
+                $contador->save();
+            }
+        }else{
+            $contador->canSend = 0;
             $contador->save();
         }
+
     }
 }
